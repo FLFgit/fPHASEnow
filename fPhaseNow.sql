@@ -6,7 +6,7 @@ from (
             (select 
                 round(sum(tmit_dl),0) as TSUM
             from (
-                select a.yrow, a.doy, a.tmit, b.daylength, b.daylength/24, (a.Tmit-5.5 * b.daylength/24) as Tmit_dl, a.abc
+                select a.yrow, a.doy, a.tmit, b.daylength, b.daylength/24, ((a.Tmit-5.5) * b.daylength/24) as Tmit_dl, a.abc
                 from
                     (select to_number(substr(grid_id,5,4)) as yrow, datum, to_number(to_char(datum, 'DDD')) as doy, sysdate as doy_sys, 
                     case when tmit < 0 then 0 else tmit/10 end as tmit,	-- see https://github.com/EMRAgit/fTemperatureSum
